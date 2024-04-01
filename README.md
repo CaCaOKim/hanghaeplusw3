@@ -73,14 +73,21 @@
 
 
 3. 시퀀스 다이어그램
+
 ![잔액조회.png](Img%2F%EC%9E%94%EC%95%A1%EC%A1%B0%ED%9A%8C.png)
+
 ![잔액충전.png](Img%2F%EC%9E%94%EC%95%A1%EC%B6%A9%EC%A0%84.png)
+
 ![상품조회.png](Img%2F%EC%83%81%ED%92%88%EC%A1%B0%ED%9A%8C.png)
+
 ![주문.png](Img%2F%EC%A3%BC%EB%AC%B8.png)
+
 ![상위 상품 조회.png](Img%2F%EC%83%81%EC%9C%84%20%EC%83%81%ED%92%88%20%EC%A1%B0%ED%9A%8C.png)
 
 
+
 4. ERD
+
 ![drawSQL-image-export.png](Img%2FdrawSQL-image-export.png)
 
 
