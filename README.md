@@ -24,7 +24,7 @@
 <h3>2. API 명세</h3>
 
 - 잔액조회
-  - GET) wallet/{id}
+  - GET) user/wallet/{id}
   - request
     - parameter) id: long 필수값
   - response
@@ -35,7 +35,7 @@
       <br/>
       <br/>
 - 잔액충전
-  - POST) wallet/{id}
+  - POST) user/wallet/{id}
   - request
     - parameter) id: long 필수값
     - body) amount: int default
@@ -57,9 +57,9 @@
       <br/>
       <br/>
 - 주문/결제
-  - POST) order/{userId}/{productId}
+  - POST) order/{userId}
   - request
-    - parameter) userId: long 필수값, productId: long 필수값
+    - parameter) userId: long 필수값, body) productIds: List<Long>
   - response
     - 200: 성공시 Order(주문 객체) 반환
     - 400: 실패 시 null 반환
@@ -148,6 +148,6 @@
 
 <h3>4. ERD</h3>
 
-![e-commerce-erd.png](Img%2Fe-commerce-erd.png)
+![e-commerce_erd.png](Img%2Fe-commerce_erd.png)
 
 

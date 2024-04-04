@@ -1,4 +1,4 @@
 package hhplusw3.ecommerce.domain.infrastructure;
 
-public class WalletRepositoryJpa {
+public class UserRepositoryMybatis {
 }

@@ -2,7 +2,7 @@ package hhplusw3.ecommerce.domain.component;
 
 import hhplusw3.ecommerce.domain.model.User;
 
-public class WalletReader {
+public class UserModifier {
 
     public User findById(long id) {
         return null;
