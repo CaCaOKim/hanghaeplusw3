@@ -148,6 +148,6 @@
 
 <h3>4. ERD</h3>
 
-![e-commerce_erd.png](Img%2Fe-commerce_erd.png)
+![e-commerce-erd.png](Img%2Fe-commerce-erd.png)
 
 
