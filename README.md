@@ -1,7 +1,7 @@
 # 항해플러스 백앤드 4기 W3: e-Commerce
 
 
-<h4>[swaggerUI](document%2FswaggerUI.md)</h2>
+<h4>[swaggerUI](./document/swaggerUI.md)</h2>
 
 <h3>1. Milestone</h3>
    
