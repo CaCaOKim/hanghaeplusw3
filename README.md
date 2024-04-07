@@ -1,6 +1,8 @@
 # 항해플러스 백앤드 4기 W3: e-Commerce
 
 
+<h4>[swaggerUI](document/swaggerUI.md)</h2>
+
 <h3>1. Milestone</h3>
    
  | 기한        | 할일                     |
@@ -128,26 +130,26 @@
           
 <h3>3. 시퀀스 다이어그램</h3>
 
-![잔액조회.png](Img%2F%EC%9E%94%EC%95%A1%EC%A1%B0%ED%9A%8C.png)
+![잔액조회.png](img%2F%EC%9E%94%EC%95%A1%EC%A1%B0%ED%9A%8C.png)
 
-![잔액충전.png](Img%2F%EC%9E%94%EC%95%A1%EC%B6%A9%EC%A0%84.png)
+![잔액충전.png](img%2F%EC%9E%94%EC%95%A1%EC%B6%A9%EC%A0%84.png)
 
-![상품조회.png](Img%2F%EC%83%81%ED%92%88%EC%A1%B0%ED%9A%8C.png)
+![상품조회.png](img%2F%EC%83%81%ED%92%88%EC%A1%B0%ED%9A%8C.png)
 
-![주문.png](Img%2F%EC%A3%BC%EB%AC%B8.png)
+![주문.png](img%2F%EC%A3%BC%EB%AC%B8.png)
 
-![상위상품 조회.png](Img%2F%EC%83%81%EC%9C%84%EC%83%81%ED%92%88%20%EC%A1%B0%ED%9A%8C.png)
+![상위상품 조회.png](img%2F%EC%83%81%EC%9C%84%EC%83%81%ED%92%88%20%EC%A1%B0%ED%9A%8C.png)
 
-![장바구니 추가.png](Img%2F%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%B6%94%EA%B0%80.png)
+![장바구니 추가.png](img%2F%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%B6%94%EA%B0%80.png)
 
-![장바구니 삭제.png](Img%2F%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%82%AD%EC%A0%9C.png)
+![장바구니 삭제.png](img%2F%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%82%AD%EC%A0%9C.png)
 
-![장바구니 조회.png](Img%2F%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%A1%B0%ED%9A%8C.png)
+![장바구니 조회.png](img%2F%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%A1%B0%ED%9A%8C.png)
 
 
 
 <h3>4. ERD</h3>
 
-![e-commerce-erd.png](Img%2Fe-commerce-erd.png)
+![e-commerce-erd.png](img%2Fe-commerce-erd.png)
 
 

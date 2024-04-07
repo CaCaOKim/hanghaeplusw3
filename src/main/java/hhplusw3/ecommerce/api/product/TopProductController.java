@@ -10,8 +10,8 @@ import java.util.List;
 public class TopProductController {
 
     // 상위 상품 조회
-    @GetMapping("/top")
-    public List<ProductRes> getTopProducts(@RequestBody long topNum, @RequestBody String soldOutYn) throws InterruptedException {
+    @GetMapping("/top/{topNum}/{soldOutYn}")
+    public List<ProductRes> getTopProducts(@PathVariable long topNum, @PathVariable String soldOutYn) throws InterruptedException {
         return List.of(
                 new ProductRes(10001, "bottle1", 10000, 10, 500),
                 new ProductRes(10002, "bottle2", 11000, 10, 400),
