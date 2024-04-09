@@ -1,6 +1,10 @@
 package hhplusw3.ecommerce.api.user;
 
 import hhplusw3.ecommerce.api.user.dto.UserRes;
+import hhplusw3.ecommerce.api.user.useCase.GetUserUseCase;
+import hhplusw3.ecommerce.domain.component.UserModifier;
+import hhplusw3.ecommerce.domain.component.UserReader;
+import hhplusw3.ecommerce.infrastructure.UserRepositoryJpa;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -10,7 +14,7 @@ class UserWalletControllerTest {
     UserWalletController userWalletController;
 
     UserWalletControllerTest() {
-        this.userWalletController = new UserWalletController();
+        this.userWalletController = new UserWalletController(new GetUserUseCase(new UserReader(new UserRepositoryJpa()), new UserModifier(new UserRepositoryJpa())));
     }
 
     long id = 1234;

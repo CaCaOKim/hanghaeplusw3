@@ -1,14 +1,20 @@
 package hhplusw3.ecommerce.domain.component;
 
 import hhplusw3.ecommerce.domain.model.User;
+import hhplusw3.ecommerce.domain.reository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 public class UserModifier {
 
-    public User findById(long id) {
-        return null;
+    UserRepository userRepository;
+
+    @Autowired
+    public UserModifier(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User charge(long id, long amount) {
+    public User chargeMoney(long id, long amount) {
         return null;
     }
 }
