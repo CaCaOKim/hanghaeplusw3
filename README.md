@@ -32,7 +32,7 @@
   - response
     - 200: 성공시 User(유저정보 객체) 반환
     - 400: 실패 시 null 반환
-  - Error
+  - error
     - id가 유실된 경우
       <br/>
       <br/>
@@ -44,7 +44,7 @@
   - response
     - 200: 성공시 User(유저정보 객체)  반환
     - 400: 실패 시 null 반환
-  - Error
+  - error
     - id가 유실된 경우
     - 충전금액이 5000원 미만인 경우
       <br/>
@@ -65,7 +65,7 @@
   - response
     - 200: 성공시 Order(주문 객체) 반환
     - 400: 실패 시 null 반환
-  - Error
+  - error
     - userId가 유실된 경우
     - 상품이 품절된 경우
     - 상품이 결재 중 품절된 경우
@@ -84,47 +84,47 @@
 - 상위 상품 목록 조회
   - GET) products/top
   - request
-      - body) topNum: long, soldOutYn: String
+    - body) topNum: long, soldOutYn: String
   - response
-      - 200: 성공시 List<Product>(상품 객체 리스트) 반환
-      - 400: 실패 시 null 반환
-        <br/>
-        <br/>
+    - 200: 성공시 List<Product>(상품 객체 리스트) 반환
+    - 400: 실패 시 null 반환
+      <br/>
+      <br/>
 - 장바구니 추가
-    - POST) basket/{id}
-    - request
-        - parameter) id: long 필수값 (userId), body) products: List<long> (productId리스트)
-    - response
-        - 200: 성공시 List<Product>(상품 객체 리스트) 반환
-        - 400: 실패 시 null 반환
-  - Error
+  - POST) basket/{id}
+  - request
+  - parameter) id: long 필수값 (userId), body) products: List<long> (productId리스트)
+  - response
+    - 200: 성공시 List<Product>(상품 객체 리스트) 반환
+    - 400: 실패 시 null 반환
+  - error
     - userId가 유실된 경우
     - 상품이 품절된 경우
     - 상품이 장바구니에 추가되는 중 품절된 경우
       <br/>
       <br/>
 - 장바구니 삭제
-    - DELETE) basket/{id}
-    - request
-        - parameter) id: long 필수값 (userId), body) products: List<long> (productId리스트)
-    - response
-        - 200: 성공시 List<Product>(상품 객체 리스트) 반환
-        - 400: 실패 시 null 반환
-    - Error
-        - userId가 유실된 경우
-          <br/>
-          <br/>
+  - DELETE) basket/{id}
+  - request
+    - parameter) id: long 필수값 (userId), body) products: List<long> (productId리스트)
+  - response
+    - 200: 성공시 List<Product>(상품 객체 리스트) 반환
+    - 400: 실패 시 null 반환
+  - error
+    - userId가 유실된 경우
+      <br/>
+      <br/>
 - 장바구니 조회
-    - GET) basket/{id}
-    - request
-        - parameter) id: long 필수값
-    - response
-        - 200: 성공시 List<Product>(상품 객체 리스트) 반환
-        - 400: 실패 시 null 반환
-    - Error
-        - userId가 유실된 경우
-          <br/>
-          <br/>
+  - GET) basket/{id}
+  - request
+    - parameter) id: long 필수값
+  - response
+    - 200: 성공시 List<Product>(상품 객체 리스트) 반환
+    - 400: 실패 시 null 반환
+  - Error
+    - userId가 유실된 경우
+      <br/>
+      <br/>
 
 
           
