@@ -5,6 +5,7 @@ import hhplusw3.ecommerce.domain.reository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Component
 public class UserModifier {
 
     UserRepository userRepository;

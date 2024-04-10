@@ -14,7 +14,7 @@ class UserWalletControllerTest {
     UserWalletController userWalletController;
 
     UserWalletControllerTest() {
-        this.userWalletController = new UserWalletController(new GetUserUseCase(new UserReader(new UserRepositoryJpa()), new UserModifier(new UserRepositoryJpa())));
+        this.userWalletController = new UserWalletController(new GetUserUseCase(new UserReader(new UserRepositoryJpa())));
     }
 
     long id = 1234;

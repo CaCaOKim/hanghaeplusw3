@@ -7,15 +7,14 @@ import hhplusw3.ecommerce.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+@Component
 public class GetUserUseCase {
 
     UserReader userReader;
-    UserModifier userModifier;
 
     @Autowired
-    public GetUserUseCase(UserReader userModifieruserReader, UserModifier userModifier) {
+    public GetUserUseCase(UserReader userReader) {
         this.userReader = userReader;
-        this.userModifier = userModifier;
     }
 
     public UserRes getUserWallet(long id) {
