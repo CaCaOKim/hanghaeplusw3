@@ -1,7 +1,8 @@
 package hhplusw3.ecommerce;
 
 import hhplusw3.ecommerce.domain.reository.UserRepository;
-import hhplusw3.ecommerce.infrastructure.UserRepositoryJpa;
+import hhplusw3.ecommerce.infrastructure.database.UserRepositoryJpa;
+import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,14 +11,14 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 
-    private DataSource dataSource;
+    private EntityManager entityManager;
 
-    public SpringConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public SpringConfig(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     @Bean
     public UserRepository userRepository() {
-        return new UserRepositoryJpa();
+        return new UserRepositoryJpa(entityManager);
     }
 }

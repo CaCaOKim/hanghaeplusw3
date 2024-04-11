@@ -1,8 +1,9 @@
 package hhplusw3.ecommerce.domain.reository;
 
 import hhplusw3.ecommerce.domain.model.User;
+import hhplusw3.ecommerce.infrastructure.entity.UserEntity;
 
 public interface UserRepository {
-    public User getUser(long id);
-    public User chargeMoney(long amount);
+    public UserEntity getUser(long id);
+    public UserEntity saveUser(UserEntity userEntity);
 }

@@ -1,23 +1,25 @@
 package hhplusw3.ecommerce.api.user;
 
 import hhplusw3.ecommerce.api.user.dto.UserRes;
-import hhplusw3.ecommerce.api.user.useCase.GetUserUseCase;
-import hhplusw3.ecommerce.domain.component.UserModifier;
-import hhplusw3.ecommerce.domain.component.UserReader;
-import hhplusw3.ecommerce.infrastructure.UserRepositoryJpa;
+import hhplusw3.ecommerce.domain.reository.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 
+@SpringBootTest
+@Transactional
 class UserWalletControllerTest {
 
+    @Autowired
     UserWalletController userWalletController;
+    @Autowired
+    UserRepository userRepository;
 
-    UserWalletControllerTest() {
-        this.userWalletController = new UserWalletController(new GetUserUseCase(new UserReader(new UserRepositoryJpa())));
-    }
-
-    long id = 1234;
+    long id = 2;
     long amount = 20000;
 
     // 잔액 조회
@@ -58,6 +60,13 @@ class UserWalletControllerTest {
     void 충전금액이_최소금액보다_낮으면_잔액충전_실패() throws InterruptedException {
         assertThatThrownBy(() -> {
             UserRes user = userWalletController.chargeUserWallet(id, 200);
+        }).isInstanceOf(RuntimeException.class);
+    }
+
+    @Test
+    void 충전금액이_0원_이하이면_잔액충전_실패() throws InterruptedException {
+        assertThatThrownBy(() -> {
+            UserRes user = userWalletController.chargeUserWallet(id, 0);
         }).isInstanceOf(RuntimeException.class);
     }
 }

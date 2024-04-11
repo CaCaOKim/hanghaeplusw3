@@ -1,7 +1,6 @@
 package hhplusw3.ecommerce.api.user.useCase;
 
 import hhplusw3.ecommerce.api.user.dto.UserRes;
-import hhplusw3.ecommerce.domain.component.UserModifier;
 import hhplusw3.ecommerce.domain.component.UserReader;
 import hhplusw3.ecommerce.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,11 @@ public class GetUserUseCase {
         this.userReader = userReader;
     }
 
-    public UserRes getUserWallet(long id) {
+    public UserRes excute(long id) {
         User user = this.userReader.getUser(id);
         if (user == null) {
-            user = new User();
+            user = new User(0, null, 0);
         }
-        return new UserRes(user.getId(), user.getName(), user.getMoney());
+        return new UserRes(user.id(), user.name(), user.money());
     }
 }
