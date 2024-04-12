@@ -2,18 +2,20 @@ package hhplusw3.ecommerce.api.product;
 
 import hhplusw3.ecommerce.api.product.dto.ProductRes;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 
+@SpringBootTest
+@Transactional
 class ProductControllerTest {
 
+    @Autowired
     ProductController productController;
 
-    ProductControllerTest() {
-        this.productController = new ProductController();
-    }
-
-    long id = 10001;
+    long id = 1;
 
     @Test
     void getProduct() throws InterruptedException {
@@ -21,8 +23,7 @@ class ProductControllerTest {
 
         assertThat(product.id()).isEqualTo(id);
         assertThat(product.name()).isEqualTo("bottle");
-        assertThat(product.price()).isEqualTo(10000);
+        assertThat(product.price()).isEqualTo(15000);
         assertThat(product.stock()).isEqualTo(30);
-        assertThat(product.sales()).isEqualTo(10);
     }
 }

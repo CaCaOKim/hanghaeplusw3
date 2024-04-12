@@ -1,6 +1,8 @@
 package hhplusw3.ecommerce.api.product;
 
 import hhplusw3.ecommerce.api.product.dto.ProductRes;
+import hhplusw3.ecommerce.api.product.useCase.GetTopProductsUseCase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,16 +11,17 @@ import java.util.List;
 @RequestMapping("product")
 public class TopProductController {
 
+    GetTopProductsUseCase getTopProductsUseCase;
+
+    @Autowired
+    TopProductController(GetTopProductsUseCase getTopProductsUseCase) {
+        this.getTopProductsUseCase = getTopProductsUseCase;
+    }
+
     // 상위 상품 조회
     @GetMapping("/top/{topNum}/{soldOutYn}")
     public List<ProductRes> getTopProducts(@PathVariable long topNum, @PathVariable String soldOutYn) throws InterruptedException {
-        return List.of(
-                new ProductRes(10001, "bottle1", 10000, 10, 500),
-                new ProductRes(10002, "bottle2", 11000, 10, 400),
-                new ProductRes(10003, "bottle3", 12000, 10, 300),
-                new ProductRes(10004, "bottle4", 13000, 10, 200),
-                new ProductRes(10005, "bottle5", 14000, 10, 100)
-        );
+        return this.getTopProductsUseCase.excute(topNum, soldOutYn);
     }
 
 }

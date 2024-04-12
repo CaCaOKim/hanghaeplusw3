@@ -1,22 +1,21 @@
 package hhplusw3.ecommerce.api.product;
 
-import hhplusw3.ecommerce.api.order.dto.OrderRes;
 import hhplusw3.ecommerce.api.product.dto.ProductRes;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
+@Transactional
 class TopProductControllerTest {
 
+    @Autowired
     TopProductController topProductController;
-
-    TopProductControllerTest() {
-        this.topProductController = new TopProductController();
-    }
 
     @Test
     void getTopProducts() throws InterruptedException {
@@ -24,10 +23,10 @@ class TopProductControllerTest {
         List<ProductRes> products = this.topProductController.getTopProducts(topNum, "N");
 
         assertThat(products.size()).isEqualTo(topNum);
-        assertThat(products.get(0).id()).isEqualTo(10001);
-        assertThat(products.get(1).id()).isEqualTo(10002);
-        assertThat(products.get(2).id()).isEqualTo(10003);
-        assertThat(products.get(3).id()).isEqualTo(10004);
-        assertThat(products.get(4).id()).isEqualTo(10005);
+        assertThat(products.get(0).id()).isEqualTo(1);
+        assertThat(products.get(1).id()).isEqualTo(2);
+        assertThat(products.get(2).id()).isEqualTo(4);
+        assertThat(products.get(3).id()).isEqualTo(5);
+        assertThat(products.get(4).id()).isEqualTo(6);
     }
 }

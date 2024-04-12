@@ -26,7 +26,7 @@ public class UserWalletController {
     }
 
     // 잔액 충전
-    @PostMapping("/{id}")
+    @PatchMapping("/{id}")
     public UserRes chargeUserWallet(@PathVariable long id, @RequestBody long amount) throws InterruptedException {
         return this.chargeMoneyUseCase.excute(id, amount);
     }

@@ -20,23 +20,23 @@ class OrderControllerTest {
         this.orderController = new OrderController();
     }
 
-    long userId = 1234;
+    long userId = 1;
 
     @Test
     void order() throws InterruptedException {
-        List<Long> productIds = Arrays.asList(10001L, 10002L, 10003L);
+        List<Long> productIds = Arrays.asList(1L, 2L, 3L);
 
         OrderRes order = this.orderController.order(userId, productIds);
 
-        assertThat(order.id()).isEqualTo(10001);
+        assertThat(order.id()).isEqualTo(1);
         assertThat(order.userId()).isEqualTo(userId);
         assertThat(order.totalPrice()).isEqualTo(51000);
-        assertThat(order.payYn()).isEqualTo("Y");
+        assertThat(order.status()).isEqualTo("complete");
     }
 
     @Test
     void userId가_유실되면_주문_실패() throws InterruptedException {
-        List<Long> productIds = Arrays.asList(10001L, 10002L, 10003L);
+        List<Long> productIds = Arrays.asList(1L, 2L, 3L);
 
         assertThatThrownBy(() -> {
             OrderRes order = this.orderController.order(0, productIds);

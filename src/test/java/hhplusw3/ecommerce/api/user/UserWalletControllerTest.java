@@ -16,8 +16,6 @@ class UserWalletControllerTest {
 
     @Autowired
     UserWalletController userWalletController;
-    @Autowired
-    UserRepository userRepository;
 
     long id = 2;
     long amount = 20000;

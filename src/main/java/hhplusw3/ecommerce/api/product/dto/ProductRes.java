@@ -5,7 +5,6 @@ public record ProductRes(
         long id,
         String name,
         long price,
-        long stock,
-        long sales
+        long stock
 ) {
 }

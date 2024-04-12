@@ -12,7 +12,7 @@ public class OrderController {
     // 주문
     @PostMapping("/{userId}")
     public OrderRes order(@PathVariable long userId, @RequestBody List<Long> productIds) throws InterruptedException {
-        return new OrderRes(10001, userId, 51000, "Y");
+        return null;
     }
 
 }

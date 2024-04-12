@@ -1,6 +1,8 @@
 package hhplusw3.ecommerce;
 
+import hhplusw3.ecommerce.domain.reository.ProductRepository;
 import hhplusw3.ecommerce.domain.reository.UserRepository;
+import hhplusw3.ecommerce.infrastructure.database.ProductRepositoryJpa;
 import hhplusw3.ecommerce.infrastructure.database.UserRepositoryJpa;
 import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
@@ -20,5 +22,10 @@ public class SpringConfig {
     @Bean
     public UserRepository userRepository() {
         return new UserRepositoryJpa(entityManager);
+    }
+
+    @Bean
+    public ProductRepository productRepository() {
+        return new ProductRepositoryJpa(entityManager);
     }
 }

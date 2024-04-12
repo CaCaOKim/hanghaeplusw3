@@ -37,7 +37,7 @@
       <br/>
       <br/>
 - 잔액충전
-  - POST) user/wallet/{id}
+  - PATCH) user/wallet/{id}
   - request
     - parameter) id: long 필수값
     - body) amount: int default
@@ -70,15 +70,6 @@
     - 상품이 품절된 경우
     - 상품이 결재 중 품절된 경우
     - 잔액이 부족한 경우
-      <br/>
-      <br/>
-- 상위 상품 목록 조회
-  - GET) products/top
-  - request
-    - body) topNum: long, soldOutYn: String
-  - response
-    - 200: 성공시 List<Product>(상품 객체 리스트) 반환
-    - 400: 실패 시 null 반환
       <br/>
       <br/>
 - 상위 상품 목록 조회
