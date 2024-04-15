@@ -11,12 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChargeMoneyUseCase {
 
-    UserReader userReader;
-    UserModifier userModifier;
+    private final UserModifier userModifier;
 
     @Autowired
-    ChargeMoneyUseCase(UserReader userReader, UserModifier userModifier) {
-        this.userReader = userReader;
+    ChargeMoneyUseCase(UserModifier userModifier) {
         this.userModifier = userModifier;
     }
 

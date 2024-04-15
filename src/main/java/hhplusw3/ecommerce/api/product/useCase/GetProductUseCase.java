@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetProductUseCase {
 
-    ProductReader productReader;
+    private final ProductReader productReader;
 
     @Autowired
     public GetProductUseCase(ProductReader productReader) {

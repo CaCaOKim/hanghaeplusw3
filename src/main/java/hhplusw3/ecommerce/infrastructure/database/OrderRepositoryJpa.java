@@ -5,6 +5,8 @@ import hhplusw3.ecommerce.domain.model.OrderProduct;
 import hhplusw3.ecommerce.domain.reository.OrderRepository;
 import hhplusw3.ecommerce.infrastructure.entity.OrderEntity;
 import hhplusw3.ecommerce.infrastructure.entity.OrderProductEntity;
+import hhplusw3.ecommerce.infrastructure.entity.ProductEntity;
+import hhplusw3.ecommerce.infrastructure.entity.UserEntity;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
@@ -20,13 +22,15 @@ public class OrderRepositoryJpa implements OrderRepository {
     @Override
     public Order getOrder(long id) {
         OrderEntity orderEntity = em.find(OrderEntity.class, id);
-        return new Order(orderEntity.getId(), orderEntity.getUserId(), orderEntity.getUser().getName(), orderEntity.getTotalPrice(), orderEntity.getStatus(), this.getOrderProducts(orderEntity.getId()));
+        return new Order(orderEntity.getId(), orderEntity.getUser().getId(), orderEntity.getUser().getName(), orderEntity.getTotalPrice(), orderEntity.getStatus(), this.getOrderProducts(orderEntity.getId()));
     }
 
     @Override
-    public Order order(Order order) {
+    public Order orderProducts(Order order) {
         OrderEntity orderEntity = new OrderEntity();
-        orderEntity.setUserId(order.userId());
+        UserEntity user = new UserEntity();
+        user.setId(order.userId());
+        orderEntity.setUser(user);
         orderEntity.setTotalPrice(order.totalPrice());
         orderEntity.setStatus(order.status());
         em.persist(orderEntity);
@@ -42,14 +46,16 @@ public class OrderRepositoryJpa implements OrderRepository {
         List<OrderProductEntity> orderProductEntities = em.createQuery(query, OrderProductEntity.class)
                 .setParameter("orderId", orderId)
                 .getResultList();
-        return orderProductEntities.stream().map(p -> new OrderProduct(p.getId(), p.getOrderId(), p.getProductId(), p.getProduct().getName(), p.getCount(), p.getStatus())).toList();
+        return orderProductEntities.stream().map(p -> new OrderProduct(p.getId(), p.getOrderId(), p.getProduct().getId(), p.getProduct().getName(), p.getCount(), p.getStatus())).toList();
     }
 
     @Override
     public OrderProduct orderProduct(OrderProduct orderProduct) {
         OrderProductEntity orderProductEntity = new OrderProductEntity();
+        ProductEntity product = new ProductEntity();
+        product.setId(orderProduct.productId());
         orderProductEntity.setOrderId(orderProduct.orderId());
-        orderProductEntity.setProductId(orderProduct.productId());
+        orderProductEntity.setProduct(product);
         orderProductEntity.setCount(orderProduct.count());
         orderProductEntity.setStatus(orderProduct.status());
         em.persist(orderProductEntity);

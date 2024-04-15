@@ -1,5 +1,6 @@
 package hhplusw3.ecommerce.infrastructure.entity;
 
+import hhplusw3.ecommerce.domain.model.OrderProduct;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
@@ -16,10 +17,10 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    @Column(name = "user_id")
-    long userId;
+//    @Column(name = "user_id")
+//    long userId;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
     @JoinColumn(name = "user_id")
     UserEntity user;
 

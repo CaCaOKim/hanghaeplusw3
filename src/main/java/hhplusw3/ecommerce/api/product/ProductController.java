@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("product")
 public class ProductController {
 
-    GetProductUseCase getProductUseCase;
+    private final GetProductUseCase getProductUseCase;
 
     @Autowired
     ProductController(GetProductUseCase getProductUseCase) {

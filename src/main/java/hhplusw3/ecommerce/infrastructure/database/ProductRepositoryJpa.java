@@ -21,6 +21,19 @@ public class ProductRepositoryJpa implements ProductRepository {
     }
 
     @Override
+    public Product updateProduct(Product product) {
+        ProductEntity productEntity = new ProductEntity();
+        productEntity.setId(product.id());
+        productEntity.setName(product.name());
+        productEntity.setPrice(product.price());
+        productEntity.setStock(product.stock());
+        productEntity.setSales(product.sales());
+        ProductEntity result = em.merge(productEntity);
+        em.flush();
+        return new Product(result.getId(), result.getName(), result.getPrice(), result.getStock(), result.getSales());
+    }
+
+    @Override
     public List<Product> getTopProducts(long topNum, String soldOutYn) {
         String query = "select p from ProductEntity p "
                 + (soldOutYn != null && soldOutYn.equals("N") ? "where p.stock > 0 " : "")

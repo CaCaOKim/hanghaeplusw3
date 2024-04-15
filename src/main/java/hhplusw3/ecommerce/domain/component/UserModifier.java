@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserModifier {
 
-    UserRepository userRepository;
-    UserReader userReader;
+    private final UserRepository userRepository;
+    private final UserReader userReader;
 
     @Autowired
     public UserModifier(UserRepository userRepository, UserReader userReader) {
@@ -18,8 +18,8 @@ public class UserModifier {
         this.userReader = userReader;
     }
 
-    public User saveUser(User user) {
-        User result = this.userRepository.saveUser(user);
+    public User updateUser(User user) {
+        User result = this.userRepository.updateUser(user);
         return result;
     }
 
@@ -31,7 +31,7 @@ public class UserModifier {
         } else if (type == TranscationType.USE) {
             money -= amount;
         }
-        User result = this.saveUser(new User(user.id(), user.name(), money));
+        User result = this.updateUser(new User(user.id(), user.name(), money));
         return result;
     }
 }

@@ -17,8 +17,8 @@ public class OrderProductEntity {
     @Column(name = "order_id")
     long orderId;
 
-    @Column(name = "product_id")
-    long productId;
+//    @Column(name = "product_id")
+//    long productId;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")

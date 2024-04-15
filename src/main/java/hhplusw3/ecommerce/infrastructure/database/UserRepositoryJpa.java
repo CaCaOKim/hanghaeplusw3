@@ -19,14 +19,14 @@ public class UserRepositoryJpa implements UserRepository {
     }
 
     @Override
-    public User saveUser(User user) {
+    public User updateUser(User user) {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(user.id());
         userEntity.setName(user.name());
         userEntity.setMoney(user.money());
-        em.merge(userEntity);
+        UserEntity result = em.merge(userEntity);
         em.flush();
-        return user;
+        return new User(result.getId(), result.getName(), result.getMoney());
     }
 
 }

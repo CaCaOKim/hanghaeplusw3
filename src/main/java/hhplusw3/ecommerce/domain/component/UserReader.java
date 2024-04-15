@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserReader {
 
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserReader(UserRepository userRepository) {

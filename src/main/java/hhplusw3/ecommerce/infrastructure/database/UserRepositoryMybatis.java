@@ -11,7 +11,7 @@ public class UserRepositoryMybatis implements UserRepository {
     }
 
     @Override
-    public User saveUser(User user) {
+    public User updateUser(User user) {
         return null;
     }
 

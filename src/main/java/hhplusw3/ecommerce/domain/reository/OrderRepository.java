@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface OrderRepository {
     public Order getOrder(long id);
-    public Order order(Order order);
+    public Order orderProducts(Order order);
     public List<OrderProduct> getOrderProducts(long orderId);
     public OrderProduct orderProduct(OrderProduct orderProduct);
 

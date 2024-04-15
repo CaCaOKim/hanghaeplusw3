@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class GetTopProductsUseCase {
 
-    ProductReader productReader;
+    private final ProductReader productReader;
 
     @Autowired
     public GetTopProductsUseCase(ProductReader productReader) {

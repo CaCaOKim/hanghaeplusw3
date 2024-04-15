@@ -1,32 +1,36 @@
 package hhplusw3.ecommerce.api.order;
 
+import hhplusw3.ecommerce.api.order.dto.OrderProductReq;
 import hhplusw3.ecommerce.api.order.dto.OrderRes;
-import hhplusw3.ecommerce.api.product.ProductController;
-import hhplusw3.ecommerce.api.user.dto.UserRes;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
+@Transactional
 class OrderControllerTest {
 
+    @Autowired
     OrderController orderController;
-
-    OrderControllerTest() {
-        this.orderController = new OrderController();
-    }
 
     long userId = 1;
 
     @Test
     void order() throws InterruptedException {
-        List<Long> productIds = Arrays.asList(1L, 2L, 3L);
+        List<OrderProductReq> orderProductReqs = new ArrayList<>();
+        orderProductReqs.add(new OrderProductReq(1, 1));
+        orderProductReqs.add(new OrderProductReq(2, 1));
+        orderProductReqs.add(new OrderProductReq(3, 1));
 
-        OrderRes order = this.orderController.order(userId, productIds);
+        OrderRes order = this.orderController.orderProducts(userId, orderProductReqs);
 
         assertThat(order.id()).isEqualTo(1);
         assertThat(order.userId()).isEqualTo(userId);
@@ -36,28 +40,35 @@ class OrderControllerTest {
 
     @Test
     void userId가_유실되면_주문_실패() throws InterruptedException {
-        List<Long> productIds = Arrays.asList(1L, 2L, 3L);
+        List<OrderProductReq> orderProductReqs = new ArrayList<>();
+        orderProductReqs.add(new OrderProductReq(1, 1));
+        orderProductReqs.add(new OrderProductReq(2, 1));
+        orderProductReqs.add(new OrderProductReq(3, 1));
 
         assertThatThrownBy(() -> {
-            OrderRes order = this.orderController.order(0, productIds);
+            OrderRes order = this.orderController.orderProducts(0, orderProductReqs);
         }).isInstanceOf(RuntimeException.class);
     }
 
     @Test
     void 상품이_품절된_경우_주문실패() throws InterruptedException {
-        List<Long> productIds = Arrays.asList(10004L);
+        List<OrderProductReq> orderProductReqs = new ArrayList<>();
+        orderProductReqs.add(new OrderProductReq(4, 5));
 
         assertThatThrownBy(() -> {
-            OrderRes order = this.orderController.order(userId, productIds);
+            OrderRes order = this.orderController.orderProducts(userId, orderProductReqs);
         }).isInstanceOf(RuntimeException.class);
     }
 
     @Test
     void 유저의_잔액이_부족한_경우_주문실패() throws InterruptedException {
-        List<Long> productIds = Arrays.asList(10001L, 10002L, 10003L);
+        List<OrderProductReq> orderProductReqs = new ArrayList<>();
+        orderProductReqs.add(new OrderProductReq(1, 3));
+        orderProductReqs.add(new OrderProductReq(2, 2));
+        orderProductReqs.add(new OrderProductReq(3, 4));
 
         assertThatThrownBy(() -> {
-            OrderRes order = this.orderController.order(1235, productIds);
+            OrderRes order = this.orderController.orderProducts(2, orderProductReqs);
         }).isInstanceOf(RuntimeException.class);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public class ProductReader {
 
-    ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
     public ProductReader(ProductRepository productRepository) {

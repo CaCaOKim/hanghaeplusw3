@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GetUserUseCase {
 
-    UserReader userReader;
+    private final UserReader userReader;
 
     @Autowired
     public GetUserUseCase(UserReader userReader) {

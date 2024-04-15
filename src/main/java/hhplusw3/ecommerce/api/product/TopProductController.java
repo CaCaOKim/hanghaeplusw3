@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("product")
 public class TopProductController {
 
-    GetTopProductsUseCase getTopProductsUseCase;
+    private final GetTopProductsUseCase getTopProductsUseCase;
 
     @Autowired
     TopProductController(GetTopProductsUseCase getTopProductsUseCase) {

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("user/wallet")
 public class UserWalletController {
 
-    GetUserUseCase getUserUseCase;
-    ChargeMoneyUseCase chargeMoneyUseCase;
+    private final GetUserUseCase getUserUseCase;
+    private final ChargeMoneyUseCase chargeMoneyUseCase;
 
     @Autowired
     UserWalletController(GetUserUseCase getUserUseCase, ChargeMoneyUseCase chargeMoneyUseCase) {
