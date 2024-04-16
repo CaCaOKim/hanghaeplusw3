@@ -30,4 +30,16 @@ public class OrderModifier {
         }
         return new Order(result.id(), result.userId(), result.userNm(), result.totalPrice(), result.status(), resultProducts);
     }
+
+    public Order updateOrderState(long orderId, String state) {
+        Order order = this.orderRepository.getOrder(orderId);
+        Order result = this.orderRepository.updateOrder(new Order(order.id(), order.userId(), order.userNm(), order.totalPrice(), state, null));
+        return result;
+    }
+
+    public OrderProduct updateOrderProductState(long orderProductId, String state) {
+        OrderProduct orderProduct = this.orderRepository.getOrderProduct(orderProductId);
+        OrderProduct result = this.orderRepository.updateOrderProduct(new OrderProduct(orderProduct.id(), orderProduct.orderId(), orderProduct.productId(), orderProduct.productNm(), orderProduct.count(), state));
+        return result;
+    }
 }

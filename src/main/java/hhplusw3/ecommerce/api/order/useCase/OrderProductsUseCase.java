@@ -11,6 +11,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Component
 public class OrderProductsUseCase {
@@ -30,31 +35,57 @@ public class OrderProductsUseCase {
         this.userModifier = userModifier;
     }
 
+    Map<Long, Lock> lockMap = new ConcurrentHashMap<>();
+
     public OrderRes excute(long userId, List<OrderProductReq> orderProdutReqs) {
         List<Product> products = new ArrayList<>();
         List<OrderProduct> orderProducts = new ArrayList<>();
         long totalPrice = 0;
         for (OrderProductReq orderProductReq : orderProdutReqs) {
-            Product product = this.productReader.getProduct(orderProductReq.productId());
-            if (product.stock() > 0) {
-                totalPrice += product.price();
-                products.add(new Product(product.id(), product.name(), product.price(), product.stock() - orderProductReq.count(), product.sales() + orderProductReq.count()));
-                orderProducts.add(new OrderProduct(0, 0, orderProductReq.productId(), product.name(), orderProductReq.count(), "ready"));
+            Lock lock = lockMap.computeIfAbsent(orderProductReq.productId(), key -> new ReentrantLock());
+            lock.lock();
+            try {
+                Product product = this.productReader.getProduct(orderProductReq.productId());
+                if (product.stock() > orderProductReq.count()) {
+                    totalPrice += product.price() * orderProductReq.count();
+                    Product afterProduct = new Product(product.id(), product.name(), product.price(), product.stock() - orderProductReq.count(), product.sales() + orderProductReq.count());
+                    this.productModifier.updateProduct(afterProduct);
+                    products.add(afterProduct);
+                    orderProducts.add(new OrderProduct(0, 0, orderProductReq.productId(), product.name(), orderProductReq.count(), "ready"));
+                }
+            } finally {
+                lock.unlock();
             }
-        }
-        User user = this.userReader.getUser(userId);
-        if (user.money() < totalPrice) {
-            throw new RuntimeException("잔액이 부족합니다.");
         }
         if (totalPrice == 0) {
             throw new RuntimeException("제품들이 모두 품절되었습니다.");
         }
-        for (Product product : products) {
-            this.productModifier.updateProduct(product);
+        User user = this.userReader.getUser(userId);
+        if (user.money() < totalPrice) {
+            for (Product reProduct : products) {
+                Optional<OrderProductReq> opr = orderProdutReqs.stream().filter(p -> p.productId() == reProduct.id()).findAny();
+                if (opr != null) {
+                    this.productModifier.updateProduct(new Product(reProduct.id(), reProduct.name(), reProduct.price(), reProduct.stock() + opr.stream().count(), reProduct.sales() - opr.stream().count()));
+                }
+            }
+            throw new RuntimeException("잔액이 부족합니다.");
         }
         Order order = this.orderModifier.orderProducts(new Order(0, userId, null, totalPrice, "ready", orderProducts));
-        List<OrderProductRes> orderProductResies = order.orderProducts().stream().map(p -> new OrderProductRes(p.id(), p.orderId(), p.productId(), p.productNm(), p.count(), p.status())).toList();
-        this.userModifier.calculateMoney(order.userId(), order.totalPrice(), TranscationType.USE);
+        orderProducts = order.orderProducts();
+        User userResult = new User(0, null, 0);
+        if (order.id() > 0) {
+            userResult = this.userModifier.calculateMoney(user.id(), totalPrice, TranscationType.USE);
+        }
+        List<OrderProductRes> orderProductResies = new ArrayList<>();
+        if (userResult.id() > 0) {
+            order = this.orderModifier.updateOrderState(order.id(), "complete");
+            for (OrderProduct orderProduct : orderProducts) {
+                orderProduct = this.orderModifier.updateOrderProductState(orderProduct.id(), "complete");
+                orderProductResies.add(new OrderProductRes(orderProduct.id(), orderProduct.orderId(), orderProduct.productId(), orderProduct.productNm(), orderProduct.count(), orderProduct.status()));
+            }
+        } else {
+            orderProductResies = order.orderProducts().stream().map(p -> new OrderProductRes(p.id(), p.orderId(), p.productId(), p.productNm(), p.count(), p.status())).toList();
+        }
         return new OrderRes(order.id(), order.userId(), order.userNm(), order.totalPrice(), order.status(), orderProductResies);
     }
 }
