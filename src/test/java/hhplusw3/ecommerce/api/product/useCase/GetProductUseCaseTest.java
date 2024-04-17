@@ -1,4 +1,4 @@
-package hhplusw3.ecommerce.api.product;
+package hhplusw3.ecommerce.api.product.useCase;
 
 import hhplusw3.ecommerce.api.product.dto.ProductRes;
 import org.junit.jupiter.api.Test;
@@ -6,20 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-class ProductControllerTest {
+class GetProductUseCaseTest {
 
     @Autowired
-    ProductController productController;
+    GetProductUseCase getProductUseCase;
 
     long id = 1;
 
     @Test
-    void getProduct() throws InterruptedException {
-        ProductRes product = this.productController.getProduct(id);
+    void excute() {
+        ProductRes product = this.getProductUseCase.excute(id);
 
         assertThat(product.id()).isEqualTo(id);
         assertThat(product.name()).isEqualTo("bottle");

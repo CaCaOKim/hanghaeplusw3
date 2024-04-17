@@ -32,8 +32,8 @@ public class UserModifier {
 
     public User calculateMoney(long id, long amount, TranscationType type) {
         Lock lock = lockMap.computeIfAbsent(id, key -> new ReentrantLock());
-        lock.lock();
         User result = new User(0, null, 0);
+        lock.lock();
         try {
             User user = this.userReader.getUser(id);
             long money = user.money();

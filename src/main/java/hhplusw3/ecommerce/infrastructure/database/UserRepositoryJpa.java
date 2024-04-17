@@ -15,7 +15,11 @@ public class UserRepositoryJpa implements UserRepository {
     @Override
     public User getUser(long id) {
         UserEntity userEntity = em.find(UserEntity.class, id);
-        return new User(userEntity.getId(), userEntity.getName(), userEntity.getMoney());
+        User result = null;
+        if (userEntity != null){
+            result = new User(userEntity.getId(), userEntity.getName(), userEntity.getMoney());
+        }
+        return result;
     }
 
     @Override

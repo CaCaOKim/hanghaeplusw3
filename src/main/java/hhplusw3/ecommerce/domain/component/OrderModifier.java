@@ -26,7 +26,7 @@ public class OrderModifier {
         Order result = this.orderRepository.orderProducts(order);
         List<OrderProduct> resultProducts = new ArrayList<>();
         for (OrderProduct orderProduct : order.orderProducts()) {
-            resultProducts.add(this.orderRepository.orderProduct(orderProduct));
+            resultProducts.add(this.orderRepository.orderProduct(new OrderProduct(orderProduct.id(), result.id(), orderProduct.productId(), orderProduct.productNm(), orderProduct.count(), orderProduct.status())));
         }
         return new Order(result.id(), result.userId(), result.userNm(), result.totalPrice(), result.status(), resultProducts);
     }

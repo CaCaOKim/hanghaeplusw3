@@ -17,7 +17,7 @@ class UserWalletControllerTest {
     @Autowired
     UserWalletController userWalletController;
 
-    long id = 2;
+    long id = 1;
     long amount = 20000;
 
     // 잔액 조회
