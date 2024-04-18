@@ -2,6 +2,7 @@
 
 
 #### [swaggerUI](./document/swaggerUI.md)
+#### [트러블 슈팅](https://more-slow.tistory.com/22)
 
 <h3>1. Milestone</h3>
    
